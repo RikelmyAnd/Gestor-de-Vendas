@@ -1,5 +1,6 @@
 package src.org;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -73,13 +74,13 @@ public class Main {
 
     public static Venda maiorVendaFuncional(List<Venda> vendas) {
         return vendas.stream()
-                .max((v1, v2) -> Double.compare(v1.getTotal(), v2.getTotal()))
+                .max(Comparator.comparingDouble(Venda::getTotal))
                 .orElse(null);
     }
 
     public static List<Venda> ordenarPorTotalFuncional(List<Venda> vendas) {
         return vendas.stream()
-                .sorted((v1, v2) -> Double.compare(v1.getTotal(), v2.getTotal()))
+                .sorted(Comparator.comparingDouble(Venda::getTotal).reversed())
                 .toList();
     }
 
